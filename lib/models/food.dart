@@ -1,9 +1,13 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'food.g.dart';
 
 @JsonSerializable()
 class Food {
-  final String id;
+  final int id;
   final String title;
-  final bool isNew;
 
-  Food({required this.id, required this.title, this.isNew = false});
+  Food({required this.id, required this.title});
+
+  factory Food.fromJson(Map<String, dynamic> json) => _$FoodFromJson(json);
 }
