@@ -15,6 +15,7 @@ dependencies:
   url_launcher: ^6.0.15
   flutter_svg: ^0.23.0+1
   toast: ^0.1.5
+  dio: ^4.0.4
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -45,7 +45,7 @@ class _CardViewState extends State<CardView> {
             ),
             Text(
               widget.tableFood.isNew ? "*" : "",
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 25),
             )
           ],
         ),
