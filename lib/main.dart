@@ -1,40 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tuvi_booking/models/food.dart';
-import 'package:tuvi_booking/models/table_food.dart';
-import 'package:tuvi_booking/widgets/card_view.dart';
+import 'package:tuvi_booking/pages/new_order.dart';
+import 'package:tuvi_booking/pages/order.dart';
+import 'package:tuvi_booking/pages/settings.dart';
+import 'package:tuvi_booking/pages/table.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  /// FIXME: dummy data
-  final List<TableFood> a = [
-    new TableFood(
-      number: 1,
-      foods: [
-        new Food(id: 1, title: "title 1"),
-        new Food(id: 1, title: "title 1"),
-      ],
-      isNew: true
-    ),
-    new TableFood(
-      number: 2,
-      foods: [
-        new Food(id: 1, title: "title 2"),
-        new Food(id: 1, title: "title 2"),
-      ],
-    ),
-    new TableFood(
-      number: 3,
-      foods: [
-        new Food(id: 1, title: "title 3"),
-        new Food(id: 1, title: "title 3"),
-      ],
-        isNew: true
-    )
-  ];
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -42,19 +16,69 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        appBar: AppBar(),
-        body: Container(
-          padding: EdgeInsets.all(20),
-          child: ListView(
-            children: a
-                .map(
-                  (e) => CardView(tableFood: e),
-                )
-                .toList(),
+      home: MyHome(),
+    );
+  }
+}
+
+class MyHome extends StatefulWidget {
+  const MyHome({Key? key}) : super(key: key);
+
+  @override
+  _MyHomeState createState() => _MyHomeState();
+}
+
+class _MyHomeState extends State<MyHome> {
+  int _selectedIndex = 0;
+  List pages = [
+    NewOrderPage(),
+    TablePage(),
+    OrderPage(),
+    SettingsPage(),
+  ];
+
+  List titles = ['Đơn hàng mới', 'Bàn đã gọi món', 'Gọi món nhanh', 'Cài đặt'];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(titles[_selectedIndex]),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(20),
+        child: pages[_selectedIndex],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        elevation: 5,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_alert_sharp),
+            label: "Đơn hàng",
           ),
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.table_chart_outlined),
+            label: "Bàn",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.emoji_food_beverage_rounded),
+            label: "Gọi món",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: "Cài đặt",
+          ),
+        ],
       ),
     );
+  }
+
+  void _onItemTapped(index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 }

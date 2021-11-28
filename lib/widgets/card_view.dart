@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tuvi_booking/models/table_food.dart';
+import 'package:tuvi_booking/models/table_order.dart';
 
 class CardView extends StatefulWidget {
-  final TableFood tableFood;
+  final TableOrder tableFood;
 
   const CardView({required this.tableFood});
 
